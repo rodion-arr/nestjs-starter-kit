@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  ### DB ################################################
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: api
+    volumes:
+      - ./.data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  ### Redis ################################################
+  redis:
+    build: ./redis
+    volumes:
+      - ./.data/redis:/data
+    ports:
+      - "6379:6379"
