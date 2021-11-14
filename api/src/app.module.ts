@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { getConfig } from '../config/configuration';
+import { CoreModule } from './core/core.module';
 
 @Module({
   imports: [
@@ -9,8 +10,8 @@ import { getConfig } from '../config/configuration';
       cache: true,
       load: [getConfig],
     }),
+    CoreModule,
   ],
   controllers: [AppController],
-  providers: [],
 })
 export class AppModule {}
