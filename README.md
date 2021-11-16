@@ -1,5 +1,7 @@
 # Node API
 
+[![test](https://github.com/rodion-arr/node-enterprise-api/workflows/Test/badge.svg)](https://github.com/rodion-arr/node-enterprise-api/actions?query=workflow%3A%22Test%22) [![codecov](https://codecov.io/gh/rodion-arr/node-enterprise-api/branch/main/graph/badge.svg?token=NGR0C23CMW)](https://codecov.io/gh/rodion-arr/node-enterprise-api)
+
 ## Getting started
 ```bash
 git clone https://github.com/rodion-arr/node-enterprise-api.git
