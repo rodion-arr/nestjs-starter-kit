@@ -25,3 +25,11 @@ jobs:
         run: |
           cd api
           npm run build
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/api/clover.xml
+          flags: unittests
+          name: lib
+          fail_ci_if_error: false
