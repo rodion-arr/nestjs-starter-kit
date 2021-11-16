@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import { getConfig } from '../config/configuration';
 import { CoreModule } from './core/core.module';
+import { UserModule } from './user/user.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { getConnectionOptions } from 'typeorm';
 
 @Module({
   imports: [
@@ -11,7 +13,13 @@ import { CoreModule } from './core/core.module';
       load: [getConfig],
     }),
     CoreModule,
+    TypeOrmModule.forRootAsync({
+      useFactory: async () =>
+        Object.assign(await getConnectionOptions(), {
+          autoLoadEntities: true,
+        }),
+    }),
+    UserModule,
   ],
-  controllers: [AppController],
 })
 export class AppModule {}

@@ -29,9 +29,9 @@ try {
     username: user,
     password,
     database: dbName,
-    entities: ['src/entities/**/*.ts'],
-    migrations: ['src/db/migrations/**/*.ts'],
-    subscribers: ['src/db/subscribers/**/*.ts'],
+    entities: ['dist/**/*.entity.js'],
+    migrations: ['dist/src/db/migrations/**/*.js'],
+    subscribers: ['dist/src/db/subscribers/**/*.js'],
   };
 
   // write config file

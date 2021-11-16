@@ -7,11 +7,13 @@ export const getConfig = (): AppConfig => ({
     password: process.env.DB_PASSWORD,
     dbName: process.env.DB_NAME,
   },
+  jwtSecret: process.env.JWT_SECRET,
 });
 
 export interface AppConfig {
   port: number;
   database: DbConfig;
+  jwtSecret: string;
 }
 
 export interface DbConfig {
