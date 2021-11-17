@@ -44,7 +44,7 @@ describe('UserController', () => {
         firstName: 'firstName',
         lastName: 'lastName',
         email: 'email',
-        password: 'p',
+        passwordHash: 'p',
       });
 
       expect(
@@ -60,6 +60,22 @@ describe('UserController', () => {
           id: 0,
           token: 'token',
         },
+      });
+    });
+  });
+
+  describe('login method', () => {
+    it('should login user', async () => {
+      jest.spyOn(authService, 'login').mockResolvedValue('mock-token');
+
+      expect(
+        await controller.login({
+          email: 'email',
+          password: 'p',
+        }),
+      ).toStrictEqual({
+        message: 'Login successful',
+        token: 'mock-token',
       });
     });
   });

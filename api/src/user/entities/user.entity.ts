@@ -20,8 +20,10 @@ export class UserEntity {
   @Column()
   email: string;
 
-  @Column()
-  password: string;
+  @Column({
+    name: 'password',
+  })
+  passwordHash: string;
 
   @Column()
   token: string;

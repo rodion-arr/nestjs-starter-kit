@@ -6,6 +6,7 @@ import { PasswordService } from '../password/password.service';
 import { JwtService } from '../jwt/jwt.service';
 import { ConfigService } from '@nestjs/config';
 import { Repository } from 'typeorm';
+import { mockUserEntity } from '../../entities/__fixtures__/user-entity.fixture';
 
 describe('UserService', () => {
   let service: UserService;
@@ -44,9 +45,8 @@ describe('UserService', () => {
   it('should be able to check user existence', async () => {
     const findOneSpy = jest.spyOn(repo, 'findOne').mockResolvedValue(undefined);
 
-    expect(await service.isUserExists('mail')).toBe(false);
+    expect(await service.isUserExists('mail')).toBe(undefined);
     expect(findOneSpy).toHaveBeenCalledWith({
-      select: ['id'],
       where: {
         email: 'mail',
       },
@@ -79,7 +79,6 @@ describe('UserService', () => {
       email: 'email',
       firstName: 'fName',
       lastName: 'lName',
-      password: 'password-hash',
     });
     expect(createSpy).toHaveBeenCalledWith({
       email: 'email',
@@ -88,5 +87,19 @@ describe('UserService', () => {
       password: 'password-hash',
       token: 'jwt',
     });
+  });
+
+  it('should check user password', async () => {
+    const compareSpy = jest
+      .spyOn(passwordService, 'compare')
+      .mockResolvedValue(true);
+
+    expect(
+      await service.checkUserPassword(mockUserEntity, 'request-password'),
+    ).toBe(true);
+    expect(compareSpy).toHaveBeenCalledWith(
+      'request-password',
+      mockUserEntity.passwordHash,
+    );
   });
 });

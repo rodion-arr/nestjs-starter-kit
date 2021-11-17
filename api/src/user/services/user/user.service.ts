@@ -15,35 +15,46 @@ export class UserService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async isUserExists(email: string): Promise<boolean> {
-    const existingUser = await this.usersRepository.findOne({
-      select: ['id'],
+  async isUserExists(email: string): Promise<UserEntity | undefined> {
+    return this.usersRepository.findOne({
       where: {
         email: email.toLowerCase(),
       },
     });
-
-    return !!existingUser;
   }
 
-  async createUser({
-    email,
-    firstName,
-    password,
-    lastName,
-  }: CreateUserDto): Promise<UserEntity> {
+  async createUser(userDto: CreateUserDto): Promise<UserEntity> {
     const userPayload = {
-      email: email.toLocaleLowerCase(),
-      firstName,
-      lastName,
-      password: await this.passwordService.generate(password),
+      email: userDto.email.toLocaleLowerCase(),
+      firstName: userDto.firstName,
+      lastName: userDto.lastName,
+      password: await this.passwordService.generate(userDto.password),
     };
 
     const newUser = this.usersRepository.create({
       ...userPayload,
-      token: this.jwtService.sign(userPayload),
+      token: this.getUserToken(userDto),
     });
 
+    return await this.updateUser(newUser);
+  }
+
+  async updateUser(newUser: UserEntity): Promise<UserEntity> {
     return await this.usersRepository.save(newUser);
+  }
+
+  async checkUserPassword(
+    user: UserEntity,
+    requestPassword: string,
+  ): Promise<boolean> {
+    return this.passwordService.compare(requestPassword, user.passwordHash);
+  }
+
+  public getUserToken(user: CreateUserDto | UserEntity): string {
+    return this.jwtService.sign({
+      email: user.email.toLocaleLowerCase(),
+      firstName: user.firstName,
+      lastName: user.lastName,
+    });
   }
 }
