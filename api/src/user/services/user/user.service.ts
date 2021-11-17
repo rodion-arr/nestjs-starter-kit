@@ -57,4 +57,10 @@ export class UserService {
       lastName: user.lastName,
     });
   }
+
+  public getAll(): Promise<UserEntity[]> {
+    return this.usersRepository.find({
+      select: ['id', 'email', 'lastName', 'firstName'],
+    });
+  }
 }

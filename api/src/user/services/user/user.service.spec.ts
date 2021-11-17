@@ -24,6 +24,7 @@ describe('UserService', () => {
         {
           provide: getRepositoryToken(UserEntity),
           useValue: {
+            find: jest.fn(),
             findOne: jest.fn(),
             create: jest.fn(),
             save: jest.fn(),
@@ -101,5 +102,16 @@ describe('UserService', () => {
       'request-password',
       mockUserEntity.passwordHash,
     );
+  });
+
+  it('should get all users', async () => {
+    const repoSpy = jest
+      .spyOn(repo, 'find')
+      .mockResolvedValue([mockUserEntity]);
+
+    expect(await service.getAll()).toStrictEqual([mockUserEntity]);
+    expect(repoSpy).toHaveBeenCalledWith({
+      select: ['id', 'email', 'lastName', 'firstName'],
+    });
   });
 });

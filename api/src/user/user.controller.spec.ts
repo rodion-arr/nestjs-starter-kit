@@ -7,10 +7,12 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from './services/jwt/jwt.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
+import { mockUserEntity } from './entities/__fixtures__/user-entity.fixture';
 
 describe('UserController', () => {
   let controller: UserController;
   let authService: AuthService;
+  let userService: UserService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -30,6 +32,7 @@ describe('UserController', () => {
 
     controller = module.get<UserController>(UserController);
     authService = module.get<AuthService>(AuthService);
+    userService = module.get<UserService>(UserService);
   });
 
   it('should be defined', () => {
@@ -77,6 +80,20 @@ describe('UserController', () => {
         message: 'Login successful',
         token: 'mock-token',
       });
+    });
+  });
+
+  describe('getUsers method', () => {
+    it('should retrieve all users', async () => {
+      const userServiceSpy = jest
+        .spyOn(userService, 'getAll')
+        .mockResolvedValue([mockUserEntity]);
+
+      expect(await controller.getUsers()).toStrictEqual({
+        message: 'Users retrieved successfully',
+        users: [mockUserEntity],
+      });
+      expect(userServiceSpy).toHaveBeenCalledTimes(1);
     });
   });
 });
