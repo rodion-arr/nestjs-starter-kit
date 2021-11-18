@@ -25,17 +25,16 @@ export class UserService {
 
   async createUser(userDto: CreateUserDto): Promise<UserEntity> {
     const userPayload = {
-      email: userDto.email.toLocaleLowerCase(),
+      email: userDto.email.toLowerCase(),
       firstName: userDto.firstName,
       lastName: userDto.lastName,
-      password: await this.passwordService.generate(userDto.password),
+      passwordHash: await this.passwordService.generate(userDto.password),
     };
 
-    const newUser = this.usersRepository.create({
-      ...userPayload,
-      token: this.getUserToken(userDto),
-    });
+    let newUser = this.usersRepository.create(userPayload);
+    newUser = await this.updateUser(newUser);
 
+    newUser.token = this.getUserToken(newUser);
     return await this.updateUser(newUser);
   }
 
@@ -50,9 +49,10 @@ export class UserService {
     return this.passwordService.compare(requestPassword, user.passwordHash);
   }
 
-  public getUserToken(user: CreateUserDto | UserEntity): string {
+  public getUserToken(user: UserEntity): string {
     return this.jwtService.sign({
-      email: user.email.toLocaleLowerCase(),
+      id: user.id,
+      email: user.email.toLowerCase(),
       firstName: user.firstName,
       lastName: user.lastName,
     });

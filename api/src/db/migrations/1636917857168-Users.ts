@@ -33,6 +33,7 @@ export class Users1636917857168 implements MigrationInterface {
           {
             name: 'token',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'created_at',

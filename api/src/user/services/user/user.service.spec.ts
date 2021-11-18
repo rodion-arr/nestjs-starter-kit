@@ -61,10 +61,8 @@ describe('UserService', () => {
     const jwtSpy = jest.spyOn(jwtService, 'sign').mockReturnValue('jwt');
     const createSpy = jest
       .spyOn(repo, 'create')
-      .mockReturnValue(new UserEntity());
-    const saveSpy = jest
-      .spyOn(repo, 'save')
-      .mockResolvedValue(new UserEntity());
+      .mockReturnValue(mockUserEntity);
+    const saveSpy = jest.spyOn(repo, 'save').mockResolvedValue(mockUserEntity);
 
     const newUser = await service.createUser({
       email: 'EMAIL',
@@ -73,10 +71,11 @@ describe('UserService', () => {
       password: 'password',
     });
 
-    expect(newUser).toBeInstanceOf(UserEntity);
+    expect(newUser).toStrictEqual(mockUserEntity);
     expect(passwordSpy).toHaveBeenCalledWith('password');
-    expect(saveSpy).toHaveBeenCalledTimes(1);
+    expect(saveSpy).toHaveBeenCalledTimes(2);
     expect(jwtSpy).toHaveBeenCalledWith({
+      id: 0,
       email: 'email',
       firstName: 'fName',
       lastName: 'lName',
@@ -85,8 +84,7 @@ describe('UserService', () => {
       email: 'email',
       firstName: 'fName',
       lastName: 'lName',
-      password: 'password-hash',
-      token: 'jwt',
+      passwordHash: 'password-hash',
     });
   });
 
