@@ -5,7 +5,7 @@
 import * as dotenv from 'dotenv';
 import { existsSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { getConfig } from '../config/configuration';
+import { getConfig } from '../src/services/app-config/configuration';
 
 dotenv.config();
 

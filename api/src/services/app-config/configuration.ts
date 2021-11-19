@@ -8,12 +8,18 @@ export const getConfig = (): AppConfig => ({
     dbName: process.env.DB_NAME,
   },
   jwtSecret: process.env.JWT_SECRET,
+  cache: {
+    host: process.env.REDIS_HOST,
+    port: parseInt(process.env.REDIS_PORT, 10) || 6379,
+    password: process.env.REDIS_PASSWORD,
+  },
 });
 
 export interface AppConfig {
   port: number;
   database: DbConfig;
   jwtSecret: string;
+  cache: CacheConfig;
 }
 
 export interface DbConfig {
@@ -22,4 +28,10 @@ export interface DbConfig {
   user: string;
   password: string;
   dbName: string;
+}
+
+export interface CacheConfig {
+  host: string;
+  port: number;
+  password: string;
 }

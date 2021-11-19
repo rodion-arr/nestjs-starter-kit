@@ -8,9 +8,14 @@ import { PasswordService } from './services/password/password.service';
 import { JwtService } from './services/jwt/jwt.service';
 import { ConfigModule } from '@nestjs/config';
 import { JwtStrategy } from './services/auth/strategies/jwt/jwt.strategy';
+import { AppCacheModule } from '../app-cache/app-cache.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity]), ConfigModule],
+  imports: [
+    TypeOrmModule.forFeature([UserEntity]),
+    ConfigModule,
+    AppCacheModule,
+  ],
   controllers: [UserController],
   providers: [
     AuthService,

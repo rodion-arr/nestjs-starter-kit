@@ -27,6 +27,10 @@ describe('UserController', () => {
           provide: getRepositoryToken(UserEntity),
           useValue: {},
         },
+        {
+          provide: 'CACHE_MANAGER',
+          useValue: jest.fn(),
+        },
       ],
     }).compile();
 
