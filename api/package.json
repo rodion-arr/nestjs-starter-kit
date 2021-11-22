@@ -39,7 +39,7 @@
     "bcryptjs": "^2.4.3",
     "cache-manager": "^3.6.0",
     "cache-manager-redis-store": "^2.0.0",
-    "class-transformer": "^0.4.0",
+    "class-transformer": "^0.5.0",
     "class-validator": "^0.13.1",
     "dotenv": "^10.0.0",
     "jsonwebtoken": "^8.5.1",
