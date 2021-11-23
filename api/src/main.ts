@@ -13,6 +13,8 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
+  app.enableShutdownHooks();
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
