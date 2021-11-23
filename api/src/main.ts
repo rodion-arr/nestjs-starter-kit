@@ -5,6 +5,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { AppLoggerService } from './logger/services/app-logger/app-logger.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -18,6 +19,10 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  app.useLogger(app.get(AppLoggerService));
+
   await app.listen(3000, '0.0.0.0');
 }
+
 bootstrap();

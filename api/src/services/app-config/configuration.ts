@@ -13,6 +13,7 @@ export const getConfig = (): AppConfig => ({
     port: parseInt(process.env.REDIS_PORT, 10) || 6379,
     password: process.env.REDIS_PASSWORD,
   },
+  logLevel: process.env.LOG_LEVEL || 'info',
 });
 
 export interface AppConfig {
@@ -20,6 +21,7 @@ export interface AppConfig {
   database: DbConfig;
   jwtSecret: string;
   cache: CacheConfig;
+  logLevel: string;
 }
 
 export interface DbConfig {

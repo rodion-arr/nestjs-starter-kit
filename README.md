@@ -14,6 +14,8 @@ docker-compose up -d
 cd ../api
 cp .env.example .env
 
+# update .env file with credentials
+
 # install dependencies
 npm ci
 
