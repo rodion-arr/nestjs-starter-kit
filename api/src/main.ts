@@ -7,6 +7,10 @@ import * as bodyParser from 'body-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  /*
+    Required to be executed before async storage middleware
+    and not loose context on POST requests
+   */
   app.use(bodyParser.json());
 
   app.enableShutdownHooks();
