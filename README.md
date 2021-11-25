@@ -1,4 +1,4 @@
-# Node API
+# Nest.js starter kit
 
 [![test](https://github.com/rodion-arr/node-enterprise-api/workflows/Test/badge.svg)](https://github.com/rodion-arr/node-enterprise-api/actions?query=workflow%3A%22Test%22) [![codecov](https://codecov.io/gh/rodion-arr/node-enterprise-api/branch/main/graph/badge.svg?token=NGR0C23CMW)](https://codecov.io/gh/rodion-arr/node-enterprise-api)
 
@@ -6,37 +6,40 @@ This is a starter kit for typical Nest.js REST API project.
 
 ## Motivation
 
-The main goal of this project is to provide fully functional Nest.js app which can be used as a started kit for creating your own REST APIs.
+The main goal of this project is to provide fully functional [Nest.js](https://nestjs.com/) app which can be used as a started kit for creating your own REST APIs.
 
-Usually it is not enough to just do `nest new project` and start writing business logic. Nest.js provides a minimal application out of the box with only one controller and service. In most cases it is required to pull and setup a bunch of additional packages from Nest.js ecosystem like `typeorm`, `passport`, `cache-manager`, DTO validators etc.
+Usually it is not enough to just run `$ nest new project` and start writing required business logic. Nest.js provides a minimal application out of the box with only one controller and service. In most cases it is required to pull and setup a bunch of additional packages from Nest.js ecosystem like `typeorm`, `passport`, `cache-manager`, DTO validators etc.
 
-This repo provides an already configured REST API project with commonly used Nest.js packages (full list below) so you can just copy it and start writing your business logic.
+This repo provides an already configured REST API project with commonly used Nest.js packages (full list below) so you can just copy it and start writing your business logic and not waste your time for boilerplate configuration.
 
 ## Features
 
-- Dockerized local development
-- Configuration via ENV variables
-- Validation via DTO
-- DB migrations
-- Redis cache
-- JWT auth with passport.js
-- Graceful shutdown
-- Automatic APIs documentation with Swagger
-- Unit tests
+- [Dockerized local development](#dockerized-local-development)
+- [Configuration via ENV variables](#configuration-via-env-variables)
+- [Validation via DTO](#validation-via-dto)
+- [DB migrations](#db-migrations)
+- [Redis cache](#redis-cache)
+- [JWT auth with passport.js](#jwt-auth-with-passportjs)
+- [Logger with TraceID generation](#logger-with-trace-id-generation)
+- [Graceful shutdown](#graceful-shutdown)
+- [Automatic APIs documentation with Swagger](#automatic-apis-documentation-with-swagger)
+- [Unit tests](#unit-tests)
 
 ### Dockerized local development
 
-You are getting fully functional docker environment for development with Postgres DB and Redis. You can spin-up all server dependencies with only 1 command without need of setting up DB and Redis servers manually. Check out [.docker-node-api](./.docker-node-api) folder.
+You are getting fully functional docker environment for development with Postgres DB and Redis. You can spin-up all server dependencies with only 1 command without need of setting up DB and Redis servers manually.
+
+Check out [.docker-node-api](./.docker-node-api) folder and [installation guide](#installation) for more details.
 
 ### Configuration via ENV variables
 
-According to [12 factor app](https://12factor.net/config) - it is recommended to store application config in Environment Variables. This technique allows you to build the bundle once and deploy it to multiple target server (e.g. QA, Staging, Prod) without code modifications. Each env will have different configuration values which application retrieves from environment variables.
+According to [12 factor app](https://12factor.net/config) - it is recommended to store application config in Environment Variables. This technique allows you to build the bundle once and deploy it to multiple target server (e.g. QA, Staging, Prod) without code modifications. Each target environment will have different configuration values which application retrieves from environment variables.
 
 This project provides a set of config values out of the box e.g. for connecting to DB and Cache server. Check out [app.module.ts](./api/src/app.module.ts#L14) and [configuration.ts](./api/src/services/app-config/configuration.ts) for more details.
 
 ### Validation via DTO
 
-Global [ValidationPipeline](./api/src/main.ts) enabled and requests to APIs are validated via [DTO](./api/src/user/dto).  
+Global [ValidationPipeline](./api/src/main.ts) enabled and requests to APIs are validated via [DTOs](./api/src/user/dto).  
 
 ### DB migrations
 
@@ -62,9 +65,9 @@ npm run migrations:revert
 
 ### Redis cache
 
-[cache-manager](https://github.com/BryanDonovan/node-cache-manager#readme) with Redis store was set up [app-cache.module.ts](./api/src/app-cache/app-cache.module.ts).
+[cache-manager](https://github.com/BryanDonovan/node-cache-manager#readme) package with Redis store is available in [app-cache.module.ts](./api/src/app-cache/app-cache.module.ts).
 
-So it is possible to use [`CacheInterceptor`](./api/src/user/user.controller.ts#L50):
+So it is possible to use [`CacheInterceptor`](./api/src/user/user.controller.ts#L50) above you controller methods or classes:
 
 ```typescript
   @UseInterceptors(CacheInterceptor)
@@ -72,7 +75,7 @@ So it is possible to use [`CacheInterceptor`](./api/src/user/user.controller.ts#
   async getUsers() {}
 ```
 
-Or inject `CacheManager`:
+Or inject `CacheManager` and use it directly:
 
 ```typescript
 constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
@@ -84,13 +87,14 @@ await this.cacheManager.get('key');
 
 JWT authentication is configured and available to use.
 
-User registration, login and JWT-protected APIs examples were added in [user.controller.ts](./api/src/user/user.controller.ts)  
+User registration, login and JWT-protected API examples were added in [user.controller.ts](./api/src/user/user.controller.ts)  
 
 ### Logger with Trace ID generation
 
 [Pino](https://github.com/pinojs/pino) added as application logger.
 
 Each request to API is signed with unique TraceID and passed to logger via [AsyncLocalStorage](https://nodejs.org/api/async_context.html#class-asynclocalstorage).
+
 Code can be found in [async-storage.middleware.ts](./api/src/global/middleware/async-storage/async-storage.middleware.ts) and [app-logger.service.ts](./api/src/logger/services/app-logger/app-logger.service.ts)
 
 <img width="799" alt="TraceID in logs example" src="https://user-images.githubusercontent.com/5843270/143482882-84c51e0e-0e54-407b-8ed7-cf7b8536f7e3.png">
@@ -105,7 +109,7 @@ This starter kit subscribed to `OnModuleDestroy` event and [disconnects](./api/s
 
 Nest.js swagger module configured with the use of [Swagger CLI plugin](https://docs.nestjs.com/openapi/cli-plugin).
 
-API docs are generated with the start of app server automatically:
+API docs are generated with the start of app server automatically and available at [http://localhost:3000/api](http://localhost:3000/api):
 
 <img width="1485" alt="Swagger doc generated" src="https://user-images.githubusercontent.com/5843270/143483373-a0f3fd48-4f27-4d53-9b8f-6b80bc147d48.png">
 
@@ -113,7 +117,7 @@ API docs are generated with the start of app server automatically:
 
 All code added in the project is covered with [unit tests](https://github.com/rodion-arr/node-enterprise-api/search?q=describe).
 
-You can find useful tests example of:
+You can find useful tests examples of:
 - DB repository mock [(auth.service.spec.ts)](./api/src/user/services/auth/auth.service.spec.ts). Search for `getRepositoryToken`.
 - Controller test [(user.controller.spec.ts)](./api/src/user/user.controller.spec.ts)
 - Middleware test [(async-storage.middleware.spec.ts)](./api/src/global/middleware/async-storage/async-storage.middleware.spec.ts)
@@ -123,7 +127,7 @@ You can find useful tests example of:
 
 ### Prerequisites
 
-- Docker for desktop
+- Docker for Desktop
 - Node.js LTS
 
 ### Getting started
