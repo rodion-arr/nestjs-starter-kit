@@ -12,7 +12,9 @@ import { AuthService } from './services/auth/auth.service';
 import { LoginDto } from './dto/login.dto';
 import { UserService } from './services/user/user.service';
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(
@@ -43,6 +45,7 @@ export class UserController {
     };
   }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(CacheInterceptor)
   @Get()
