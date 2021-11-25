@@ -31,8 +31,8 @@ async function bootstrap() {
     .setDescription(
       `<a
          target="_blank"
-         href="https://github.com/rodion-arr/node-enterprise-api"
-       >https://github.com/rodion-arr/node-enterprise-api</a>`,
+         href="https://github.com/rodion-arr/nestjs-starter-kit"
+       >https://github.com/rodion-arr/nestjs-starter-kit</a>`,
     )
     .addBearerAuth()
     .build();

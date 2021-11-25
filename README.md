@@ -1,6 +1,6 @@
 # Nest.js starter kit
 
-[![test](https://github.com/rodion-arr/node-enterprise-api/workflows/Test/badge.svg)](https://github.com/rodion-arr/node-enterprise-api/actions?query=workflow%3A%22Test%22) [![codecov](https://codecov.io/gh/rodion-arr/node-enterprise-api/branch/main/graph/badge.svg?token=NGR0C23CMW)](https://codecov.io/gh/rodion-arr/node-enterprise-api)
+[![test](https://github.com/rodion-arr/nestjs-starter-kit/workflows/Test/badge.svg)](https://github.com/rodion-arr/nestjs-starter-kit/actions?query=workflow%3A%22Test%22) [![codecov](https://codecov.io/gh/rodion-arr/nestjs-starter-kit/branch/main/graph/badge.svg?token=NGR0C23CMW)](https://codecov.io/gh/rodion-arr/nestjs-starter-kit)
 
 This is a starter kit for typical Nest.js REST API project.
 
@@ -115,7 +115,7 @@ API docs are generated with the start of app server automatically and available 
 
 ### Unit tests
 
-All code added in the project is covered with [unit tests](https://github.com/rodion-arr/node-enterprise-api/search?q=describe).
+All code added in the project is covered with [unit tests](https://github.com/rodion-arr/nestjs-starter-kit/search?q=describe).
 
 You can find useful tests examples of:
 - DB repository mock [(auth.service.spec.ts)](./api/src/user/services/auth/auth.service.spec.ts). Search for `getRepositoryToken`.
@@ -134,12 +134,12 @@ You can find useful tests examples of:
 
 - Clone the repository 
 ```console
-git clone https://github.com/rodion-arr/node-enterprise-api.git
+git clone https://github.com/rodion-arr/nestjs-starter-kit.git
 ```
 
 - Run docker containers (DB, Redis, etc)
 ```console
-cd node-enterprise-api/.docker-node-api
+cd nestjs-starter-kit/.docker-node-api
 docker-compose up -d
 ```
 
