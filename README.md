@@ -23,11 +23,12 @@ This repo provides an already configured REST API project with commonly used Nes
 - [Logger with TraceID generation](#logger-with-trace-id-generation)
 - [Graceful shutdown](#graceful-shutdown)
 - [Automatic APIs documentation with Swagger](#automatic-apis-documentation-with-swagger)
+- [Sending emails](#e-mail-service-with-local-mail-trap])
 - [Unit tests](#unit-tests)
 
 ### Dockerized local development
 
-You are getting fully functional docker environment for development with Postgres DB and Redis. You can spin-up all server dependencies with only 1 command without need of setting up DB and Redis servers manually.
+You are getting fully functional docker environment for development with Postgres DB, Redis and utility services such as local SMTP server. You can spin-up all server dependencies with only 1 command without need of setting up DB and Redis servers manually.
 
 Check out [.docker-node-api](./.docker-node-api) folder and [installation guide](#installation) for more details.
 
@@ -112,6 +113,33 @@ Nest.js swagger module configured with the use of [Swagger CLI plugin](https://d
 API docs are generated with the start of app server automatically and available at [http://localhost:3000/api](http://localhost:3000/api):
 
 <img width="1485" alt="Swagger doc generated" src="https://user-images.githubusercontent.com/5843270/143483373-a0f3fd48-4f27-4d53-9b8f-6b80bc147d48.png">
+
+### E-mail service with local mail trap
+
+Mail service is available out of the box and can be used like this:
+
+Inject in constructor:
+```typescript
+constructor(
+  private readonly mailer: MailService,
+) {}
+```
+
+Send mail:
+```typescript
+await this.mailer.send({
+  to: 'to-mail@example.com',
+  from: this.mailer.from(),
+  subject: 'User registered',
+  text: 'Mail body',
+});
+```
+
+You can check sent mails by opening http://localhost:8025/ and browse MailHog UI.
+
+![MailHog UI](https://user-images.githubusercontent.com/5843270/143854275-1415cf0d-0003-4744-9f25-4649a1b406c9.png)
+
+Powered by [nodemailer](https://www.npmjs.com/package/nodemailer).
 
 ### Unit tests
 

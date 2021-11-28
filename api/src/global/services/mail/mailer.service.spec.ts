@@ -24,7 +24,7 @@ describe('MailerService', () => {
           provide: ConfigService,
           useValue: {
             get: jest.fn().mockReturnValue({
-              from: 'from-main',
+              from: 'from-mail',
               transportOptions: {
                 host: 'smtp-host',
                 port: 123,
@@ -69,5 +69,9 @@ describe('MailerService', () => {
 
     expect(mailResult).toBe('mock-response');
     expect(sendMock).toHaveBeenCalledWith(sendOptions);
+  });
+
+  it('should return from mail', () => {
+    expect(service.from()).toBe('from-mail');
   });
 });
