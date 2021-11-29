@@ -23,7 +23,7 @@ This repo provides an already configured REST API project with commonly used Nes
 - [Logger with TraceID generation](#logger-with-trace-id-generation)
 - [Graceful shutdown](#graceful-shutdown)
 - [Automatic APIs documentation with Swagger](#automatic-apis-documentation-with-swagger)
-- [Sending emails](#e-mail-service-with-local-mail-trap])
+- [Sending emails](#e-mail-service-with-local-mail-trap)
 - [Unit tests](#unit-tests)
 
 ### Dockerized local development
