@@ -177,7 +177,7 @@ cd ../api
 cp .env.example .env
 ```
 
-- Update .env file with credentials
+- Update .env file with credentials if needed
 
 - Next install dependencies
 ```console

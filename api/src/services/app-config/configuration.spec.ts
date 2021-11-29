@@ -27,13 +27,24 @@ describe('config helper', () => {
       database: {
         dbName: 'api',
         host: 'db',
-        password: '',
+        password: 'secret',
         port: 5432,
-        user: '',
+        user: 'postgres',
       },
       jwtSecret: 'secret',
       logLevel: 'debug',
       port: 3000,
+      mail: {
+        from: 'no-reply@nestjs-starter-kit.smtp.com',
+        transportOptions: {
+          auth: {
+            pass: 'any-password',
+            user: 'any-user',
+          },
+          host: '127.0.0.1',
+          port: 1025,
+        },
+      },
     });
   });
 });
