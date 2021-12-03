@@ -26,7 +26,7 @@ describe('config helper', () => {
       },
       database: {
         dbName: 'api',
-        host: 'db',
+        host: 'localhost',
         password: 'secret',
         port: 5432,
         user: 'postgres',
