@@ -2,14 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MailService } from './mail.service';
 import { ConfigService } from '@nestjs/config';
 import { createTransport, Transporter } from 'nodemailer';
-import { mocked } from 'ts-jest/utils';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 jest.mock('nodemailer');
 
 describe('MailerService', () => {
   let service: MailService;
-  const connectMock = mocked(createTransport);
+  const connectMock = jest.mocked(createTransport);
   const sendMock = jest.fn().mockResolvedValue({ response: 'mock-response' });
 
   beforeEach(async () => {
@@ -47,7 +46,7 @@ describe('MailerService', () => {
   });
 
   it('should connect to SMTP', () => {
-    const connectMock = mocked(createTransport);
+    const connectMock = jest.mocked(createTransport);
 
     expect(connectMock).toHaveBeenCalledWith({
       host: 'smtp-host',

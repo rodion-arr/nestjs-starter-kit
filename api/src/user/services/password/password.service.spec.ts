@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PasswordService } from './password.service';
-import { mocked } from 'ts-jest/utils';
 import { hash, compare } from 'bcryptjs';
 
 jest.mock('bcryptjs', () => ({
@@ -24,13 +23,13 @@ describe('PasswordService', () => {
   });
 
   it('should generate passwords', async () => {
-    const hashMock = mocked(hash);
+    const hashMock = jest.mocked(hash);
     hashMock.mockResolvedValue('mock-password' as never);
     expect(await service.generate('password')).toBe('mock-password');
   });
 
   it('should compare password hash', async () => {
-    const compareMock = mocked(compare);
+    const compareMock = jest.mocked(compare);
     compareMock.mockResolvedValue(true as never);
     expect(await service.compare('password', 'hash')).toBe(true);
   });
