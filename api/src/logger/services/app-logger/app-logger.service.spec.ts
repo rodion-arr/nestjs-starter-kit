@@ -3,7 +3,6 @@ import { AppLoggerService } from './app-logger.service';
 import { ASYNC_STORAGE } from '../../../global/constants';
 import { ConfigService } from '@nestjs/config';
 import { pino } from 'pino';
-import { mocked } from 'ts-jest/utils';
 
 jest.mock('pino', () => ({
   pino: jest.fn(),
@@ -34,7 +33,7 @@ describe('AppLoggerService', () => {
   };
 
   it('should be defined', async () => {
-    const pinoMock = mocked(pino);
+    const pinoMock = jest.mocked(pino);
     const module = await setUpModule();
     const service = module.get<AppLoggerService>(AppLoggerService);
 
@@ -48,7 +47,7 @@ describe('AppLoggerService', () => {
   });
 
   it('should define error logger', async () => {
-    const pinoMock = mocked(pino);
+    const pinoMock = jest.mocked(pino);
     const errorMock = jest.fn();
     pinoMock.mockReturnValueOnce({
       error: errorMock,
@@ -67,7 +66,7 @@ describe('AppLoggerService', () => {
   });
 
   it('should define info logger', async () => {
-    const pinoMock = mocked(pino);
+    const pinoMock = jest.mocked(pino);
     const logMock = jest.fn();
     pinoMock.mockReturnValueOnce({
       info: logMock,
@@ -85,7 +84,7 @@ describe('AppLoggerService', () => {
   });
 
   it('should define warn logger', async () => {
-    const pinoMock = mocked(pino);
+    const pinoMock = jest.mocked(pino);
     const logMock = jest.fn();
     pinoMock.mockReturnValueOnce({
       warn: logMock,
