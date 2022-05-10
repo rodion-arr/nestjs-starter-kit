@@ -44,7 +44,7 @@
     "class-validator": "^0.13.2",
     "dotenv": "^16.0.0",
     "jsonwebtoken": "^8.5.1",
-    "nodemailer": "^6.7.4",
+    "nodemailer": "^6.7.5",
     "nodemailer-smtp-transport": "^2.7.4",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
