@@ -48,7 +48,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
-    "pg": "^8.7.3",
+    "pg": "^8.8.0",
     "pino": "^8.6.1",
     "pino-pretty": "^8.1.0",
     "reflect-metadata": "^0.1.13",
