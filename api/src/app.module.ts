@@ -19,7 +19,6 @@ import { GlobalModule } from './global/global.module';
     AppCacheModule,
     UserModule,
     ConfigModule,
-    AppCacheModule,
     LoggerModule,
   ],
 })

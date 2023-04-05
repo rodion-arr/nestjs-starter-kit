@@ -28,13 +28,14 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@nestjs/common": "^8.4.7",
+    "@nestjs/cache-manager": "^1.0.0",
+    "@nestjs/common": "^9.4.0",
     "@nestjs/config": "^2.3.1",
-    "@nestjs/core": "^8.4.5",
+    "@nestjs/core": "^9.4.0",
     "@nestjs/jwt": "^10.0.3",
     "@nestjs/passport": "^9.0.3",
-    "@nestjs/platform-express": "^8.4.5",
-    "@nestjs/swagger": "^5.2.1",
+    "@nestjs/platform-express": "^9.4.0",
+    "@nestjs/swagger": "^6.3.0",
     "@nestjs/typeorm": "^9.0.1",
     "bcryptjs": "^2.4.3",
     "cache-manager": "^5.2.0",
@@ -59,7 +60,7 @@
   "devDependencies": {
     "@nestjs/cli": "^9.3.0",
     "@nestjs/schematics": "^9.1.0",
-    "@nestjs/testing": "^8.4.5",
+    "@nestjs/testing": "^9.4.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/cache-manager": "^4.0.2",
     "@types/cache-manager-redis-store": "^2.0.1",

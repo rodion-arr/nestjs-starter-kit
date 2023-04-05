@@ -1,11 +1,5 @@
-import {
-  CACHE_MANAGER,
-  CacheModule,
-  Inject,
-  Logger,
-  Module,
-  OnModuleDestroy,
-} from '@nestjs/common';
+import { Inject, Logger, Module, OnModuleDestroy } from '@nestjs/common';
+import { CacheModule, CACHE_MANAGER } from '@nestjs/cache-manager';
 import { CacheConfigService } from './services/cache-config/cache-config.service';
 import { ConfigModule } from '@nestjs/config';
 import { Cache } from 'cache-manager';
@@ -30,6 +24,6 @@ export class AppCacheModule implements OnModuleDestroy {
 
   onModuleDestroy(): any {
     this.logger.log('Disconnecting from cache');
-    (this.cacheManager.store as any).getClient().end(true);
+    (this.cacheManager.store as any).getClient().quit(true);
   }
 }
