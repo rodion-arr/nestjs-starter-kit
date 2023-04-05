@@ -44,9 +44,9 @@ describe('UserService', () => {
   });
 
   it('should be able to check user existence', async () => {
-    const findOneSpy = jest.spyOn(repo, 'findOne').mockResolvedValue(undefined);
+    const findOneSpy = jest.spyOn(repo, 'findOne').mockResolvedValue(null);
 
-    expect(await service.isUserExists('mail')).toBe(undefined);
+    expect(await service.isUserExists('mail')).toBe(null);
     expect(findOneSpy).toHaveBeenCalledWith({
       where: {
         email: 'mail',

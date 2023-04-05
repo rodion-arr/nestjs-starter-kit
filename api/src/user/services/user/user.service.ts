@@ -15,7 +15,7 @@ export class UserService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async isUserExists(email: string): Promise<UserEntity | undefined> {
+  async isUserExists(email: string): Promise<UserEntity | null> {
     return this.usersRepository.findOne({
       where: {
         email: email.toLowerCase(),

@@ -17,12 +17,12 @@ export class AuthService {
     return await this.userService.createUser(userDto);
   }
 
-  async login(loginRequest: LoginDto): Promise<string> {
+  async login(loginRequest: LoginDto): Promise<string | void> {
     const { email, password } = loginRequest;
     const user = await this.userService.isUserExists(email);
 
     if (!user) {
-      this.failLogin();
+      return this.failLogin();
     }
 
     if (await this.userService.checkUserPassword(user, password)) {

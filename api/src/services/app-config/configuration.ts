@@ -1,31 +1,33 @@
-export const getConfig = (): AppConfig => ({
-  port: parseInt(process.env.PORT, 10) || 3000,
-  jwtSecret: process.env.JWT_SECRET,
-  logLevel: process.env.LOG_LEVEL || 'info',
-  database: {
-    host: process.env.DB_HOST,
-    port: parseInt(process.env.DB_PORT, 10) || 5432,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    dbName: process.env.DB_NAME,
-  },
-  cache: {
-    host: process.env.REDIS_HOST,
-    port: parseInt(process.env.REDIS_PORT, 10) || 6379,
-    password: process.env.REDIS_PASSWORD,
-  },
-  mail: {
-    from: process.env.MAIL_FROM,
-    transportOptions: {
-      host: process.env.MAIL_HOST,
-      port: parseInt(process.env.MAIL_PORT, 10),
-      auth: {
-        user: process.env.MAIL_AUTH_USER,
-        pass: process.env.MAIL_AUTH_PASS,
+export const getConfig = (): AppConfig => {
+  return {
+    port: parseInt(process.env.PORT as string, 10) || 3000,
+    jwtSecret: process.env.JWT_SECRET as string,
+    logLevel: process.env.LOG_LEVEL || 'info',
+    database: {
+      host: process.env.DB_HOST as string,
+      port: parseInt(process.env.DB_PORT as string, 10) || 5432,
+      user: process.env.DB_USER as string,
+      password: process.env.DB_PASSWORD as string,
+      dbName: process.env.DB_NAME as string,
+    },
+    cache: {
+      host: process.env.REDIS_HOST as string,
+      port: parseInt(process.env.REDIS_PORT as string, 10) || 6379,
+      password: process.env.REDIS_PASSWORD as string,
+    },
+    mail: {
+      from: process.env.MAIL_FROM as string,
+      transportOptions: {
+        host: process.env.MAIL_HOST as string,
+        port: parseInt(process.env.MAIL_PORT as string, 10),
+        auth: {
+          user: process.env.MAIL_AUTH_USER as string,
+          pass: process.env.MAIL_AUTH_PASS as string,
+        },
       },
     },
-  },
-});
+  };
+};
 
 export interface AppConfig {
   port: number;

@@ -18,7 +18,7 @@ describe('AsyncStorageMiddleware', () => {
         {
           provide: ASYNC_STORAGE,
           useValue: {
-            run: (store, callback) => {
+            run: (store: unknown, callback: () => void) => {
               callback();
             },
           },

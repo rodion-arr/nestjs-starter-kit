@@ -20,7 +20,7 @@ export class MailService {
         port,
         auth: { user, pass },
       },
-    } = configService.get<MailConfig>('mail');
+    } = configService.get<MailConfig>('mail') as MailConfig;
 
     this.fromValue = from;
     this.transport = createTransport({

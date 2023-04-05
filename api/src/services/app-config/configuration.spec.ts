@@ -10,7 +10,7 @@ describe('config helper', () => {
   it('should return configs', () => {
     const env = readFileSync(join(process.cwd(), '.env.example'), 'utf8')
       .split('\n')
-      .reduce((vars, i) => {
+      .reduce((vars: any, i) => {
         const [variable, value] = i.split('=');
         vars[variable] = value;
         return vars;

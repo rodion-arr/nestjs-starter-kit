@@ -61,7 +61,7 @@ describe('AuthService', () => {
     it('should create user', async () => {
       const existSpy = jest
         .spyOn(userService, 'isUserExists')
-        .mockResolvedValue(undefined);
+        .mockResolvedValue(null);
       const createSpy = jest
         .spyOn(userService, 'createUser')
         .mockResolvedValue(new UserEntity());
@@ -90,7 +90,7 @@ describe('AuthService', () => {
 
       const existSpy = jest
         .spyOn(userService, 'isUserExists')
-        .mockResolvedValue(undefined);
+        .mockResolvedValue(null);
 
       try {
         await authService.login({

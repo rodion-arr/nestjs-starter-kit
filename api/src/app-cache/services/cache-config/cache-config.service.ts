@@ -9,8 +9,9 @@ export class CacheConfigService implements CacheOptionsFactory {
   constructor(private readonly configService: ConfigService) {}
 
   createCacheOptions(): CacheModuleOptions {
-    const { host, port, password } =
-      this.configService.get<CacheConfig>('cache');
+    const { host, port, password } = this.configService.get<CacheConfig>(
+      'cache',
+    ) as CacheConfig;
 
     return {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
