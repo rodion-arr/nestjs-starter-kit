@@ -49,7 +49,7 @@ Global [ValidationPipeline](./api/src/main.ts) enabled and requests to APIs are 
 To generate new migration run:
 
 ```console
-npm run migrations:new -- -d src/db/migrations -n Roles
+npm run migrations:new -- src/db/migrations/Roles
 ```
 
 To apply migrations run:
@@ -186,7 +186,6 @@ npm ci
 
 - Init config and run migrations
 ```console
-npm run migrations:init
 npm run migrations:up
 ```
 
