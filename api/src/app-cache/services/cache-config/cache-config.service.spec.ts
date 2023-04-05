@@ -1,7 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheConfigService } from './cache-config.service';
 import { ConfigService } from '@nestjs/config';
-import * as redisStore from 'cache-manager-redis-store';
+import { redisStore } from 'cache-manager-redis-store';
+
+jest.mock('cache-manager-redis-store', () => ({
+  redisStore: jest.fn(),
+}));
 
 describe('CacheConfigService', () => {
   let service: CacheConfigService;
@@ -30,13 +34,21 @@ describe('CacheConfigService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should return redis config', () => {
-    expect(service.createCacheOptions()).toStrictEqual({
-      ttl: 60 * 60,
-      store: redisStore,
-      host: 'host',
-      port: 0,
-      auth_pass: 'password',
+  it('should return redis config', async () => {
+    const cacheOptions = service.createCacheOptions();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    await cacheOptions.store();
+    const redisMock = jest.mocked(redisStore);
+
+    expect(cacheOptions.ttl).toBe(60 * 60);
+
+    expect(redisMock).toHaveBeenCalledWith({
+      socket: {
+        host: 'host',
+        port: 0,
+      },
+      password: 'password',
     });
   });
 });
