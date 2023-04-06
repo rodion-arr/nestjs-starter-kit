@@ -23,7 +23,8 @@ async function bootstrap() {
     }),
   );
 
-  app.useLogger(app.get(AppLoggerService));
+  const logger = app.get(AppLoggerService);
+  app.useLogger(logger);
 
   // API docs
   const config = new DocumentBuilder()
@@ -39,7 +40,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000, '0.0.0.0');
+  const port = process.env.PORT || 3000;
+
+  await app.listen(port, '0.0.0.0');
+
+  logger.log(`App started on http://localhost:${port}`);
 }
 
 bootstrap();
