@@ -35,7 +35,7 @@
     "@nestjs/jwt": "^10.1.1",
     "@nestjs/passport": "^10.0.0",
     "@nestjs/platform-express": "^9.4.3",
-    "@nestjs/swagger": "^7.1.1",
+    "@nestjs/swagger": "^7.1.15",
     "@nestjs/typeorm": "^10.0.0",
     "bcryptjs": "^2.4.3",
     "cache-manager": "^5.2.3",
