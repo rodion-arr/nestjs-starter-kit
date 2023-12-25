@@ -71,7 +71,7 @@
     "@types/nodemailer": "^6.4.13",
     "@types/nodemailer-smtp-transport": "^2.7.5",
     "@types/passport-jwt": "^3.0.9",
-    "@types/supertest": "^2.0.12",
+    "@types/supertest": "^6.0.1",
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.62.0",
