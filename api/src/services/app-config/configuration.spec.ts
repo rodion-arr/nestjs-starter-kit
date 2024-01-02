@@ -31,6 +31,7 @@ describe('config helper', () => {
         port: 5432,
         user: 'postgres',
       },
+      appEnv: 'dev',
       jwtSecret: 'secret',
       logLevel: 'debug',
       port: 3000,

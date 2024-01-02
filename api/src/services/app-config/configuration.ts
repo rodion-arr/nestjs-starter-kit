@@ -1,6 +1,7 @@
 export const getConfig = (): AppConfig => {
   return {
     port: parseInt(process.env.PORT as string, 10) || 3000,
+    appEnv: process.env.APP_ENV as AppEnv,
     jwtSecret: process.env.JWT_SECRET as string,
     logLevel: process.env.LOG_LEVEL || 'info',
     database: {
@@ -31,11 +32,18 @@ export const getConfig = (): AppConfig => {
 
 export interface AppConfig {
   port: number;
+  appEnv: AppEnv;
   jwtSecret: string;
   logLevel: string;
   database: DbConfig;
   cache: CacheConfig;
   mail: MailConfig;
+}
+
+export enum AppEnv {
+  DEV = 'dev',
+  TEST = 'test',
+  PROD = 'production',
 }
 
 export interface DbConfig {
