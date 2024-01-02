@@ -51,7 +51,7 @@ describe('AppLoggerService', () => {
     const errorMock = jest.fn();
     pinoMock.mockReturnValueOnce({
       error: errorMock,
-    } as unknown as pino.Logger);
+    } as unknown as ReturnType<typeof pino>);
 
     const module = await setUpModule();
     const service = module.get<AppLoggerService>(AppLoggerService);
@@ -70,7 +70,7 @@ describe('AppLoggerService', () => {
     const logMock = jest.fn();
     pinoMock.mockReturnValueOnce({
       info: logMock,
-    } as unknown as pino.Logger);
+    } as unknown as ReturnType<typeof pino>);
 
     const module = await setUpModule();
     const service = module.get<AppLoggerService>(AppLoggerService);
@@ -88,7 +88,7 @@ describe('AppLoggerService', () => {
     const logMock = jest.fn();
     pinoMock.mockReturnValueOnce({
       warn: logMock,
-    } as unknown as pino.Logger);
+    } as unknown as ReturnType<typeof pino>);
 
     const module = await setUpModule();
     const service = module.get<AppLoggerService>(AppLoggerService);
