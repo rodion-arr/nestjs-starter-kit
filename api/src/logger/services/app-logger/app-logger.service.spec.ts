@@ -25,7 +25,14 @@ describe('AppLoggerService', () => {
         {
           provide: ConfigService,
           useValue: {
-            get: jest.fn().mockReturnValue('debug'),
+            get: jest.fn().mockImplementation((key: string) => {
+              switch (key) {
+                case 'logLevel':
+                  return 'debug';
+                case 'appEnv':
+                  return 'dev';
+              }
+            }),
           },
         },
       ],

@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { AppLoggerService } from './logger/services/app-logger/app-logger.service';
-import * as bodyParser from 'body-parser';
+import { json } from 'body-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
@@ -12,7 +12,7 @@ async function bootstrap() {
     Required to be executed before async storage middleware
     and not loose context on POST requests
    */
-  app.use(bodyParser.json());
+  app.use(json());
 
   app.enableShutdownHooks();
 

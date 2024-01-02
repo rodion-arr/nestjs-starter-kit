@@ -1,8 +1,9 @@
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
-import { pino } from 'pino';
+import { pino, LoggerOptions } from 'pino';
 import { AsyncLocalStorage } from 'async_hooks';
 import { ASYNC_STORAGE } from '../../../global/constants';
 import { ConfigService } from '@nestjs/config';
+import { AppEnv } from '../../../services/app-config/configuration';
 
 @Injectable()
 export class AppLoggerService implements LoggerService {
@@ -14,13 +15,19 @@ export class AppLoggerService implements LoggerService {
     private readonly configService: ConfigService,
   ) {
     const logLevel = configService.get('logLevel');
+    const appEnv = configService.get<AppEnv>('appEnv');
 
-    this.pino = pino({
+    const loggerConfig: LoggerOptions = {
       level: logLevel,
-      transport: {
+    };
+
+    if (appEnv === AppEnv.DEV) {
+      loggerConfig.transport = {
         target: 'pino-pretty',
-      },
-    });
+      };
+    }
+
+    this.pino = pino(loggerConfig);
   }
 
   error(message: any, trace?: string, context?: string): any {
