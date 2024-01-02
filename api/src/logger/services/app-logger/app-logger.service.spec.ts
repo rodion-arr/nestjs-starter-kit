@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppLoggerService } from './app-logger.service';
-import { ASYNC_STORAGE } from '../../../global/constants';
+import { ASYNC_STORAGE } from 'src/global/constants';
 import { ConfigService } from '@nestjs/config';
 import { pino } from 'pino';
 
