@@ -3,8 +3,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ASYNC_STORAGE } from '../../constants';
 import { AsyncLocalStorage } from 'async_hooks';
 
-jest.mock('uuid', () => ({
-  v4: jest.fn().mockReturnValue('mock-trace-id'),
+jest.mock('node:crypto', () => ({
+  randomUUID: jest.fn().mockReturnValue('mock-trace-id'),
 }));
 
 describe('AsyncStorageMiddleware', () => {
