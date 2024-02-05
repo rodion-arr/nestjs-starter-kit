@@ -41,14 +41,13 @@ describe('CacheConfigService', () => {
     await cacheOptions.store();
     const redisMock = jest.mocked(redisStore);
 
-    expect(cacheOptions.ttl).toBe(60 * 60);
-
     expect(redisMock).toHaveBeenCalledWith({
       socket: {
         host: 'host',
         port: 0,
       },
       password: 'password',
+      ttl: 60 * 60,
     });
   });
 });
