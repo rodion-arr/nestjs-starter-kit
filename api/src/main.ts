@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { AppLoggerService } from './logger/services/app-logger/app-logger.service';
 import { json } from 'body-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +14,8 @@ async function bootstrap() {
     and not loose context on POST requests
    */
   app.use(json());
+
+  app.use(helmet());
 
   app.enableShutdownHooks();
 
