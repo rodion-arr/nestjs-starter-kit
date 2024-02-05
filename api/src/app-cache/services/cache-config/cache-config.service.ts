@@ -24,9 +24,9 @@ export class CacheConfigService implements CacheOptionsFactory {
             port,
           },
           password: password ?? null,
+          ttl: 60 * 60, // 1h
         });
       },
-      ttl: 60 * 60, // 1h
     };
   }
 }

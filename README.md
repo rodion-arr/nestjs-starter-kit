@@ -81,6 +81,10 @@ Or inject `CacheManager` and use it directly:
 ```typescript
 constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
+await this.cacheManager.set('test', 'test', {
+  ttl: 10, // in seconds
+} as any);
+
 await this.cacheManager.get('key');
 ```
 
