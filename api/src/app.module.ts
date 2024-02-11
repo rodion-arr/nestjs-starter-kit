@@ -7,6 +7,7 @@ import { AppCacheModule } from './app-cache/app-cache.module';
 import { LoggerModule } from './logger/logger.module';
 import { AsyncStorageMiddleware } from './global/middleware/async-storage/async-storage.middleware';
 import { GlobalModule } from './global/global.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { GlobalModule } from './global/global.module';
     UserModule,
     ConfigModule,
     LoggerModule,
+    HealthModule,
   ],
 })
 export class AppModule {
