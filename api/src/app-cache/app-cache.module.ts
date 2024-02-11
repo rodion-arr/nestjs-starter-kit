@@ -12,6 +12,7 @@ import { LoggerModule } from '../logger/logger.module';
     CacheModule.registerAsync({
       imports: [ConfigModule],
       useClass: CacheConfigService,
+      isGlobal: true,
     }),
   ],
   providers: [CacheConfigService],

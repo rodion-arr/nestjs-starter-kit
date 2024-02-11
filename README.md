@@ -25,6 +25,7 @@ This repo provides an already configured REST API project with commonly used Nes
 - [Automatic APIs documentation with Swagger](#automatic-apis-documentation-with-swagger)
 - [Sending emails](#e-mail-service-with-local-mail-trap)
 - [Unit tests](#unit-tests)
+- [Health check](#health-check)
 
 ### Dockerized local development
 
@@ -150,10 +151,15 @@ Powered by [nodemailer](https://www.npmjs.com/package/nodemailer).
 All code added in the project is covered with [unit tests](https://github.com/rodion-arr/nestjs-starter-kit/search?q=describe).
 
 You can find useful tests examples of:
+
 - DB repository mock [(auth.service.spec.ts)](./api/src/user/services/auth/auth.service.spec.ts). Search for `getRepositoryToken`.
 - Controller test [(user.controller.spec.ts)](./api/src/user/user.controller.spec.ts)
 - Middleware test [(async-storage.middleware.spec.ts)](./api/src/global/middleware/async-storage/async-storage.middleware.spec.ts)
 - Service test [(jwt.service.spec.ts)](./api/src/user/services/jwt/jwt.service.spec.ts)
+
+## Health check
+
+Health check endpoint is available at [http://localhost:3000/health](http://localhost:3000/health) and returns 200 OK if server is healthy. This endpoint also checks DB and Redis connections.
 
 ## Installation
 
