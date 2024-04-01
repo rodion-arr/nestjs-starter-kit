@@ -30,7 +30,7 @@
   "dependencies": {
     "@nestjs/cache-manager": "^2.2.1",
     "@nestjs/common": "^9.4.2",
-    "@nestjs/config": "^3.2.0",
+    "@nestjs/config": "^3.2.1",
     "@nestjs/core": "^9.4.2",
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/passport": "^10.0.3",
