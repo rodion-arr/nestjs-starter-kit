@@ -26,6 +26,6 @@ import { HealthModule } from './health/health.module';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AsyncStorageMiddleware).forRoutes('*');
+    consumer.apply(AsyncStorageMiddleware).forRoutes('{*splat}');
   }
 }

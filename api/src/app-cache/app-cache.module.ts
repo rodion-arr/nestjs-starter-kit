@@ -23,8 +23,9 @@ export class AppCacheModule implements OnModuleDestroy {
 
   constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
-  onModuleDestroy(): any {
+  async onModuleDestroy() {
     this.logger.log('Disconnecting from cache');
-    (this.cacheManager.store as any).getClient().quit(true);
+    await this.cacheManager.disconnect();
+    this.logger.log('Disconnected from cache');
   }
 }
