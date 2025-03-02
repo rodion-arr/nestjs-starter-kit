@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CacheModuleOptions, CacheOptionsFactory } from '@nestjs/cache-manager';
-import { redisStore } from 'cache-manager-redis-store';
 import { CacheConfig } from 'src/services/app-config/configuration';
+import { createKeyv } from '@keyv/redis';
 
 @Injectable()
 export class CacheConfigService implements CacheOptionsFactory {
@@ -14,19 +14,16 @@ export class CacheConfigService implements CacheOptionsFactory {
     ) as CacheConfig;
 
     return {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      store: async () => {
-        return await redisStore({
+      stores: [
+        createKeyv({
           // Store-specific configuration:
           socket: {
             host,
             port,
           },
           password: password ?? null,
-          ttl: 60 * 60, // 1h
-        });
-      },
+        }),
+      ],
     };
   }
 }

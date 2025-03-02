@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CacheConfigService } from './cache-config.service';
 import { ConfigService } from '@nestjs/config';
-import { redisStore } from 'cache-manager-redis-store';
+import { createKeyv } from '@keyv/redis';
 
-jest.mock('cache-manager-redis-store', () => ({
-  redisStore: jest.fn(),
+jest.mock('@keyv/redis', () => ({
+  createKeyv: jest.fn(),
 }));
 
 describe('CacheConfigService', () => {
@@ -35,11 +35,8 @@ describe('CacheConfigService', () => {
   });
 
   it('should return redis config', async () => {
-    const cacheOptions = service.createCacheOptions();
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    await cacheOptions.store();
-    const redisMock = jest.mocked(redisStore);
+    service.createCacheOptions();
+    const redisMock = jest.mocked(createKeyv);
 
     expect(redisMock).toHaveBeenCalledWith({
       socket: {
@@ -47,7 +44,6 @@ describe('CacheConfigService', () => {
         port: 0,
       },
       password: 'password',
-      ttl: 60 * 60,
     });
   });
 });
