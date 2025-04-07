@@ -1,6 +1,6 @@
 # Nest.js starter kit
 
-[![test](https://github.com/rodion-arr/nestjs-starter-kit/workflows/Test/badge.svg)](https://github.com/rodion-arr/nestjs-starter-kit/actions?query=workflow%3A%22Test%22) [![codecov](https://codecov.io/gh/rodion-arr/nestjs-starter-kit/branch/main/graph/badge.svg?token=NGR0C23CMW)](https://codecov.io/gh/rodion-arr/nestjs-starter-kit)
+[![Test](https://github.com/rodion-arr/nestjs-starter-kit/actions/workflows/test.yml/badge.svg)](https://github.com/rodion-arr/nestjs-starter-kit/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/rodion-arr/nestjs-starter-kit/branch/main/graph/badge.svg?token=NGR0C23CMW)](https://codecov.io/gh/rodion-arr/nestjs-starter-kit)
 
 This is a starter kit for typical Nest.js REST API project.
 
