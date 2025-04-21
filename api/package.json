@@ -30,7 +30,7 @@
   "dependencies": {
     "@keyv/redis": "^4.3.0",
     "@nestjs/cache-manager": "^3.0.0",
-    "@nestjs/common": "^11.0.11",
+    "@nestjs/common": "^11.0.20",
     "@nestjs/config": "^4.0.0",
     "@nestjs/core": "^11.0.11",
     "@nestjs/jwt": "^11.0.0",
