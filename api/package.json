@@ -51,7 +51,7 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "pg": "^8.11.5",
-    "pino": "^8.19.0",
+    "pino": "^9.7.0",
     "pino-pretty": "^10.3.1",
     "reflect-metadata": "^0.1.14",
     "rimraf": "^5.0.5",
