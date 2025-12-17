@@ -83,7 +83,7 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typeorm": "^0.3.28",
-    "typescript": "^5.7.3"
+    "typescript": "^5.9.3"
   },
   "jest": {
     "moduleFileExtensions": [
