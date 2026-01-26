@@ -28,7 +28,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@keyv/redis": "^5.1.5",
+    "@keyv/redis": "^5.1.6",
     "@nestjs/cache-manager": "^3.0.1",
     "@nestjs/common": "^11.1.9",
     "@nestjs/config": "^4.0.2",
